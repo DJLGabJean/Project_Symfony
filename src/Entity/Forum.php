@@ -19,6 +19,7 @@ class Forum
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'forum', targetEntity: Comment::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private Collection $comments;
 
     #[ORM\ManyToOne(inversedBy: 'forums')]
@@ -26,6 +27,7 @@ class Forum
     private ?Videogame $videogame = null;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'forums')]
+    #[ORM\JoinColumn(nullable: true)]
     private Collection $tags;
 
     #[ORM\OneToOne(mappedBy: 'forum', cascade: ['persist', 'remove'])]
@@ -33,7 +35,6 @@ class Forum
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->types = new ArrayCollection();
         $this->tags = new ArrayCollection();

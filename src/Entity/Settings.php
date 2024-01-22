@@ -21,7 +21,7 @@ class Settings
     private ?string $state = null;
 
     #[ORM\OneToOne(inversedBy: 'settings', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Forum $forum = null;
 
     public function getId(): ?int

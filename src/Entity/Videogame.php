@@ -19,6 +19,7 @@ class Videogame
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'videogame', targetEntity: Forum::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private Collection $forums;
 
     public function __construct()

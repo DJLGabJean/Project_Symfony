@@ -19,6 +19,7 @@ class Tag
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Forum::class, inversedBy: 'tags')]
+    #[ORM\JoinColumn(nullable: true)]
     private Collection $forums;
 
     public function __construct()
