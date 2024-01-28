@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+
+<div class="flex items-center justify-center h-screen bg-white">
+    <div class="w-full max-w-md p-8 space-y-6 bg-white shadow-lg rounded-md">
+        <h2 class="text-3xl font-bold text-center">Inscription</h2>
+        <p class="text-gray-500 text-center">Rejoins notre communauté du gaming. Conquérons le monde ensemble!</p>
+
+        {{ form_start(registrationForm, {'attr': {'class': 'space-y-4'}}) }}
+            <div class="space-y-2">
+                {{ form_label(registrationForm.username, 'Pseudo', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                {{ form_widget(registrationForm.username, {'attr': {'class': 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'}}) }}
+                {{ form_errors(registrationForm.username, {'attr': {'class': 'text-red'}}) }}
+            </div>
+            <div class="space-y-2">
+                {{ form_label(registrationForm.email, 'Adresse mail', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'}}) }}
+                {{ form_errors(registrationForm.email, {'attr': {'class': 'text-red'}}) }}
+            </div>
+            <div class="space-y-2">
+                {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'}}) }}
+                {{ form_errors(registrationForm.plainPassword, {'attr': {'class': 'text-red'}}) }}
+            </div>
+            <div class="space-y-2">
+                {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions d\'utilisation', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_errors(registrationForm.agreeTerms, {'attr': {'class': 'text-red'}}) }}
+            </div>
+            <button
+                class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full bg-green-500 hover:bg-green-600 rounded-md text-white"
+                type="submit"
+            >
+                S'inscrire
+            </button>
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full bg-blue-500 hover:bg-blue-600 text-white">
+                <a class="text-white" href="{{ path('app_homepage') }}" rel="ugc">
+                     Retourner à l'accueil
+                </a>
+            </button>
+      </div>
+        {{ form_end(registrationForm) }}
+    </div>
+</div>
+
+{% endblock %}

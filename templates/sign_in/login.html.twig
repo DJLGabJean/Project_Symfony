@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+
+<div class="flex flex-col items-center justify-center h-screen bg-white">
+  <div class="w-full max-w-md p-8 space-y-4 bg-gray-100 rounded-lg shadow-2xl">
+    <div class="flex items-center justify-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="w-12 h-12 text-green-500"
+      >
+        <line x1="6" x2="10" y1="12" y2="12"></line>
+        <line x1="8" x2="8" y1="10" y2="14"></line>
+        <line x1="15" x2="15.01" y1="13" y2="13"></line>
+        <line x1="18" x2="18.01" y1="11" y2="11"></line>
+        <rect width="20" height="12" x="2" y="6" rx="2"></rect>
+      </svg>
+    </div>
+
+    {#Formulaire pour la connexion#}
+    <h2 class="text-3xl font-bold text-center text-gray-900">Connexion</h2>
+      <form method="post" class="space-y-4">
+        {% if error %}
+          <div class="text-red-500">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+      <div class="space-y-2">
+        <label
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700"
+          for="inputEmail"
+        >
+          Adresse mail
+        </label>
+        <input
+          class="flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 text-gray-900"
+          type="email" 
+          value="{{ last_username }}" 
+          name="email" 
+          id="inputEmail"
+          autocomplete="email"
+          required autofocus
+        />
+      </div>
+      <div class="space-y-2">
+        <label
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700"
+          for="inputPassword"
+        >
+          Mot de passe
+        </label>
+        <input
+          type="password"
+          class="flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 text-gray-900"
+          name="password" 
+          id="inputPassword"
+          autocomplete="current-password"
+          required
+        />
+      </div>
+          <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+          >
+      {% set userLoggedIn = app.user is not null %}
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full bg-green-500 hover:bg-green-600 text-white"
+              id="buttonLogin"
+              type="submit"
+              {% if userLoggedIn %}disabled{% endif %}
+      >
+        Se connecter
+      </button>
+    </form>
+
+      {#Bouton d'accueil#}
+      <div class="mt-4" id="buttonHome">
+        <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full bg-blue-500 hover:bg-blue-600 text-white">
+          <a class="text-white" href="{{ path('app_homepage') }}" rel="ugc">
+          Retourner à l'accueil
+          </a>
+        </button>
+      </div>
+        
+      {#Bouton de deconnexion qui apparaît seulement si on est connecté#}
+      {% if userLoggedIn %}
+        <div class="mb-3">
+            Vous êtes connecté en tant que {{ app.user.email }}
+        </div>
+        <div class="mt-4">
+          <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full bg-red-500 hover:bg-red-600 text-white">
+            <a class="text-white" href="{{ path('app_logout') }}" rel="ugc">
+            Deconnexion
+            </a>
+          </button>
+        </div>
+        <style>
+          #buttonHome {
+            display: none;
+          }
+          #buttonLogin {
+            display: none;
+          }
+        </style>
+      {% endif %}
+  </div>
+</div>
+
+{% endblock %}
