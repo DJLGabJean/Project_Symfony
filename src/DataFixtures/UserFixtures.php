@@ -3,14 +3,21 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
-
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
+    private $passwordEncoder;
+
     public const USER_REFERENCE = "User";
+
+    public function __construct(UserPasswordHasherInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $usersArray = [
@@ -37,7 +44,9 @@ class UserFixtures extends Fixture
             $username = new User();
             $username->setUsername($user);
             $username->setEmail($user . "@gmail.com");
-            $username->setPassword($passwordArray[$key]);
+            // Hashage du mot de passe
+            $hashedPassword = $this->passwordEncoder->hashPassword($username, $passwordArray[$key]);
+            $username->setPassword($hashedPassword);
             $username->setRoles(["ROLE_USER"]);
             $manager->persist($username);
             $this->addReference(self::USER_REFERENCE . '_' . $key, $username);

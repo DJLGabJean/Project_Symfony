@@ -24,6 +24,12 @@ class Settings
     #[ORM\JoinColumn(nullable: true)]
     private ?Forum $forum = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $theme = null;
+
+    #[ORM\Column]
+    private ?bool $allowComments = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,4 +70,29 @@ class Settings
 
         return $this;
     }
+
+    public function getTheme(): ?string
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(?string $theme): static
+    {
+        $this->theme = $theme;
+
+        return $this;
+    }
+
+    public function isAllowComments(): ?bool
+    {
+        return $this->allowComments;
+    }
+
+    public function setAllowComments(bool $allowComments): static
+    {
+        $this->allowComments = $allowComments;
+
+        return $this;
+    }
+
 }

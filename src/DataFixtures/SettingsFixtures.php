@@ -27,22 +27,31 @@ class SettingsFixtures extends Fixture
             "Privé"
         ];
 
+        $permissionCommentsArray = [
+            true,
+            true,
+            false
+        ];
+
 
         $settings1 = new Settings();
         $settings1->setDate(new DateTimeImmutable($datesArray[0]));
         $settings1->setState($statesArray[0]);
+        $settings1->setAllowComments($permissionCommentsArray[0]);
         $manager->persist($settings1);
         $this->addReference(self::SETTINGS_REFERENCE . '_' . 0, $settings1);
 
         $settings2 = new Settings();
         $settings2->setDate(new DateTimeImmutable($datesArray[1]));
         $settings2->setState($statesArray[1]);
+        $settings2->setAllowComments($permissionCommentsArray[1]);
         $manager->persist($settings2);
         $this->addReference(self::SETTINGS_REFERENCE . '_' . 1, $settings2);
 
         $settings3 = new Settings();
         $settings3->setDate(new DateTimeImmutable($datesArray[2]));
         $settings3->setState($statesArray[2]);
+        $settings3->setAllowComments($permissionCommentsArray[2]);
         $manager->persist($settings3);
         $this->addReference(self::SETTINGS_REFERENCE . '_' . 2, $settings3);
 
