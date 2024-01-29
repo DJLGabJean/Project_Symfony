@@ -50,13 +50,25 @@
       </div>
     </form>
 
-    <a class= "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-4"
-        href=" {{path('app_login')}}"> Se connecter
-    </a>
+    {% set userLoggedIn = app.user is not null %}
 
-    <a class= "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-2 py-2 ml-2"
-        href=" {{path('app_register')}}"> S'inscrire
-    </a>
+    {% if not userLoggedIn %}
+        <button class= "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-4">
+            <a href="{{ path('app_login') }}">Se connecter</a>
+        </button>
+
+        <button class= "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-2 py-2 ml-2">
+            <a href="{{ path('app_register') }}">S'inscrire</a>
+        </button>
+    {% endif %}
+
+    {% if userLoggedIn %}
+        <button class= "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-2 py-2 ml-2">
+            <a href="{{ path('app_logout') }}">Deconnexion</a>
+        </button>
+    {% endif %}
+
+
   </header>
   <main class="flex flex-1 overflow-auto">
     <div class="flex-1 p-4 md:p-6">
