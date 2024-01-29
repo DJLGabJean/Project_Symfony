@@ -22,4 +22,13 @@ class VideogameRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function findAll(): array
+    {
+        return $this->createQueryBuilder('vg')
+            ->getQuery()
+            ->getResult();
+    }
+
+    
+
 }
