@@ -29,4 +29,13 @@ class ForumRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findByID(int $id): ?Forum
+    {
+        return $this->createQueryBuilder('fo')
+            ->andWhere('fo.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

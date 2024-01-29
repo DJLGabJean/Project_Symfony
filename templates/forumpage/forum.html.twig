@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="flex flex-col h-screen">
+    <header class="flex items-center h-16 px-4 border-b md:px-6">
+        <a class="flex items-center gap-2 text-lg font-semibold md:text-base" href="{{path("app_homepage")}}">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-6 h-6"
+            >
+                <line x1="6" x2="10" y1="12" y2="12"></line>
+                <line x1="8" x2="8" y1="10" y2="14"></line>
+                <line x1="15" x2="15.01" y1="13" y2="13"></line>
+                <line x1="18" x2="18.01" y1="11" y2="11"></line>
+                <rect width="20" height="12" x="2" y="6" rx="2"></rect>
+            </svg>
+            <span>GameForum</span>
+        </a>
+        <form class="flex-1 ml-auto sm:flex-initial">
+            <div class="relative">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400"
+                >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input
+                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                placeholder="Search forums..."
+                type="search"
+                />
+            </div>
+        </form>
+    </header>
+    <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
+        <div class="flex items-center">
+            <h1 class="font-semibold text-lg md:text-2xl">Discussions</h1>
+        </div>
+        <div class="border shadow-sm rounded-lg">
+            <div class="grid gap-6">
+                <h2 class="font-semibold text-xl">110 Comments</h2>
+
+                {% for comment in forum.comments %}
+                <div class="text-sm flex items-start gap-4">
+                    <span class="relative flex shrink-0 overflow-hidden rounded-full w-10 h-10 border">
+                        <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">AC</span>
+                    </span>
+                    <div class="grid gap-1.5">
+                        <div class="flex items-center gap-2">
+                            <div class="font-semibold">l</div>
+                            <div class="text-gray-500 text-xs dark:text-gray-400">5 months ago</div>
+                        </div>
+                    <div>
+                        {{comment.description}}
+                    </div>
+                    <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                        Reply
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}
