@@ -27,3 +27,5 @@ node_modules/
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+/templates/adding/forum.add.html.twig
