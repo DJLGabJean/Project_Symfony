@@ -5,8 +5,12 @@ namespace App\Form;
 use App\Entity\Forum;
 use App\Entity\Settings;
 use App\Entity\Tag;
+use App\Entity\Videogame;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\Validator\Constraints\Count;
-use Proxies\__CG__\App\Entity\Videogame;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -23,11 +27,8 @@ class ForumType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom du Forum',
             ])
-            ->add('videogame', EntityType::class, [
-                'class' => Videogame::class,
-                'choice_label' => 'name',
-                'label' => 'Jeu vidéo',
-                'required' => true,
+            ->add('videogame', VideogameType::class, [
+                'label' => false,
             ])
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,
@@ -38,7 +39,7 @@ class ForumType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new Count(['min' => 1, 'minMessage' => 'Choisissiez au moins un tag.'])
-                ]
+                ],
             ])
             ->add('settings', EntityType::class, [
                 'class' => Settings::class,

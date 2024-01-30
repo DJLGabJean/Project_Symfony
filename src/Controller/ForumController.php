@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Forum;
+use App\Entity\Videogame;
 use App\Form\ForumType;
 use App\Repository\ForumRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,8 +42,24 @@ class ForumController extends AbstractController
         }
 
         if ($forumForm->isSubmitted() && $forumForm->isValid()) {
+            $videogame = $forum->getVideogame();
+            $existingVideogame = $entityManager->getRepository(Videogame::class)->findOneBy(['name' => $videogame->getName()]);
+
+            if ($existingVideogame === null) {
+                $entityManager->persist($videogame);
+                $this->addFlash('success', 'Jeu vidéo ajouté avec succès!');
+            }
+
+            else {
+                $videogame = $existingVideogame;
+                $forum->setVideogame($videogame);
+                $entityManager->persist($videogame);
+                $this->addFlash('success', 'Jeu vidéo existant ajouté avec succès!');
+            }
+            
             $entityManager->persist($forum);
             $entityManager->flush();
+            $this->addFlash('success', 'Forum ajouté avec succès!');
 
             return $this->redirectToRoute('app_forum_{id}', [
                 'id' => $forum->getId(),
@@ -68,6 +85,7 @@ class ForumController extends AbstractController
         if ($forumForm->isSubmitted() && $forumForm->isValid()) {
             $entityManager->persist($forum);
             $entityManager->flush();
+            $this->addFlash('success', 'Forum modifié avec succès!');
 
             return $this->redirectToRoute('app_forum_{id}', [
                 'id' => $forum->getId(),

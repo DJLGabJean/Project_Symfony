@@ -22,6 +22,15 @@ class VideogameRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function findByID(int $id): ?Videogame
+    {
+        return $this->createQueryBuilder('vg')
+            ->andWhere('vg.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function findAll(): array
     {
         return $this->createQueryBuilder('vg')
