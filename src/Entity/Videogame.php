@@ -6,8 +6,10 @@ use App\Repository\VideogameRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: VideogameRepository::class)]
+#[UniqueEntity(fields: ['name'], message: 'Ce jeu vidéo est déjà enregistré!')]
 class Videogame
 {
     #[ORM\Id]

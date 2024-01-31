@@ -5,24 +5,24 @@
 <div class="flex flex-col h-screen">
   <header class="flex items-center h-16 px-4 border-b md:px-6">
     <a class="flex items-center gap-2 text-lg font-semibold md:text-base" href="{{path("app_homepage")}}">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="w-6 h-6"
-      >
-        <line x1="6" x2="10" y1="12" y2="12"></line>
-        <line x1="8" x2="8" y1="10" y2="14"></line>
-        <line x1="15" x2="15.01" y1="13" y2="13"></line>
-        <line x1="18" x2="18.01" y1="11" y2="11"></line>
-        <rect width="20" height="12" x="2" y="6" rx="2"></rect>
-      </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-6 h-6 text-green-500"
+        >
+          <line x1="6" x2="10" y1="12" y2="12"></line>
+          <line x1="8" x2="8" y1="10" y2="14"></line>
+          <line x1="15" x2="15.01" y1="13" y2="13"></line>
+          <line x1="18" x2="18.01" y1="11" y2="11"></line>
+          <rect width="20" height="12" x="2" y="6" rx="2"></rect>
+        </svg>
       <span>GameForum</span>
     </a>
     <form class="flex-1 ml-auto sm:flex-initial">
@@ -71,28 +71,94 @@
 
   </header>
   <main class="flex flex-1 overflow-auto">
+    <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <button>
+          <a href="{{ path('app_forum_add') }}">Ajouter un forum</a>
+          </button>
+        <button>
+          <a href="{{ path('app_videogame_add') }}">Ajouter un jeu vidéo</a>
+        </button>
+        <button>
+          <a href="{{ path('app_tag_add') }}">Ajouter un tag</a>
+        </button>
+        <button>
+          <a href="{{ path('app_settings_add') }}">Ajouter des paramètres</a>
+        </button>
+        <button>
+          <a href="{{ path('app_user_add') }}">Ajouter un utilisateur</a>
+        </button>
+        <button>
+          <a href="{{ path('app_comment_add') }}">Ajouter un commentaire</a>
+        </button>
+      </div>
+    </div>
     <div class="flex-1 p-4 md:p-6">
       <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
         <div class="flex flex-col space-y-1.5 p-6">
           <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">Forums récents</h3>
+          {% for forum in forums|reverse|slice(0, 5) %}
+            <div class="p-6">
+              <div>
+                <h3 class="font-semibold">
+                  <a href="{{ path('app_forum', { 'id': forum.id }) }}">{{ forum.name }}</a>
+                </h3>
+              </div>
+            </div>
+        {% endfor %}
         </div>
-        <div class="p-6">
-          <img
-            alt="Post thumbnail"
-            class="w-16 h-16 rounded-lg mr-4"
-            height="200"
-            src="/placeholder.svg"
-            width="200"
-            style="aspect-ratio: 200 / 200; object-fit: cover;"
-          />
-          <div>
-            <h3 class="font-semibold">Titre du forum</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Brève description</p>
+      </div>
+      <br>
+      <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">Jeux vidéos récents</h3>
+            {% for videogame in videogames|reverse|slice(0, 5) %}
+            <div class="p-6">
+              <img
+              alt="Image du jeu"
+              class="w-16 h-16 rounded-lg mr-4"
+              height="200"
+              src="/placeholder.svg"
+              width="200"
+              style="aspect-ratio: 200 / 200; object-fit: cover;"
+              />
+              <div>
+                <h3 class="font-semibold">{{ videogame.name }}</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400">(Brève description)</p>
+              </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <br>
+      <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold whitespace-nowrap leading-none tracking-tight">Commentaires publiés récemment</h3>
+            {% for user in users|reverse|slice(0, 5) %}
+              {% for comment in comments|reverse|slice(0, 5) %}
+                {% if user == comment.user and comment.description is not null %}
+                <div class="p-6">
+                  <div>
+                    <img
+                    alt="Image de profil"
+                    class="w-16 h-16 rounded-lg mr-4"
+                    height="200"
+                    src="/placeholder.svg"
+                    width="200"
+                    style="aspect-ratio: 200 / 200; object-fit: cover;"
+                    />
+                    <h3 class="font-semibold">{{user.username}}</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">{{comment.description}}</p>
+                  </div>
+                </div>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+            <br>
           </div>
         </div>
       </div>
     </div>
   </main>
 </div>
-
 {% endblock %}

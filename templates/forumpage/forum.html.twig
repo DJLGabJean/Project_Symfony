@@ -20,7 +20,7 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="w-6 h-6"
+                class="w-6 h-6 text-green-500"
             >
                 <line x1="6" x2="10" y1="12" y2="12"></line>
                 <line x1="8" x2="8" y1="10" y2="14"></line>
@@ -101,10 +101,10 @@
             </div>
         </div>
     </main>
-    {% for message in app.flashes('success') %}
+    {# {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}
         </div>
-    {% endfor %}
+    {% endfor %} #}
 </div>
 {% endblock %}

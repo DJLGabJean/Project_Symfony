@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\VideogameType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,18 +12,23 @@ use App\Entity\Videogame;
 
 class VideogameController extends AbstractController
 {
-    #[Route("/videogame/add", name:"add_videogame", methods:"POST")]
-    public function addVideogame(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/videogame/add', name: 'app_videogame_add')]
+    public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $name = $request->request->get('name');
-
         $videogame = new Videogame();
-        $videogame->getId();
-        $videogame->setName($name);
+        $videogameForm = $this->createForm(VideogameType::class, $videogame);
+        $videogameForm->handleRequest($request);
 
-        $entityManager->persist($videogame);
-        $entityManager->flush();
+        if ($videogameForm->isSubmitted() && $videogameForm->isValid()) {
+            $entityManager->persist($videogame);
+            $entityManager->flush();
+            $this->addFlash('success', 'Jeu vidéo ajouté avec succès!');
 
-        return $this->redirectToRoute('forum_homepage');
+            return $this->redirectToRoute('app_homepage', []);
+        }
+
+        return $this->render('adding/videogame.add.html.twig', [
+            'videogameForm' => $videogameForm->createView()
+        ]);
     }
 }

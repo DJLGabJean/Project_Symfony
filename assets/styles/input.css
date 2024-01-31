@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#sidePanel {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+}
+
+#sidePanel.hidden {
+    transform: translateX(-200%);
+}
+
+#sidePanel.slide-in {
+    transform: translateX(0);
+}
+
+#sidePanel.slide-out {
+    transform: translateX(-100%);
+}
