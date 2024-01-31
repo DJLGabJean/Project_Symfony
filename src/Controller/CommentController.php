@@ -12,23 +12,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommentController extends AbstractController
 {
-    #[Route('/comment/add', name: 'app_comment_add')]
-    public function add(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $comment = new Comment();
-        $commentForm = $this->createForm(CommentType::class, $comment);
-        $commentForm->handleRequest($request);
+    // #[Route('/forum/{id}', name: 'app_forum')]
+    // public function add(Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $comment = new Comment();
+    //     $commentForm = $this->createForm(CommentType::class, $comment);
+    //     $commentForm->handleRequest($request);
 
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-            $entityManager->persist($comment);
-            $entityManager->flush();
-            $this->addFlash('success', 'Commentaire ajouté avec succès!');
+    //     if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+    //         $entityManager->persist($comment);
+    //         $entityManager->flush();
+    //         $this->addFlash('success', 'Commentaire ajouté avec succès!');
 
-            return $this->redirectToRoute('app_homepage', []);
-        }
+    //         return $this->redirectToRoute('app_homepage', []);
+    //     }
 
-        return $this->render('adding/comment.add.html.twig', [
-            'commentForm' => $commentForm->createView()
-        ]);
-    }
+    //     return $this->render('forumpage/forum.html.twig', [
+    //         'commentForm' => $commentForm->createView()
+    //     ]);
+    // }
 }

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240131093414 extends AbstractMigration
+final class Version20240131225329 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20240131093414 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE comment (id INT AUTO_INCREMENT NOT NULL, forum_id INT DEFAULT NULL, user_id INT DEFAULT NULL, description VARCHAR(255) NOT NULL, INDEX IDX_9474526C29CCBAD0 (forum_id), INDEX IDX_9474526CA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE comment (id INT AUTO_INCREMENT NOT NULL, forum_id INT DEFAULT NULL, user_id INT NOT NULL, description VARCHAR(3000) NOT NULL, INDEX IDX_9474526C29CCBAD0 (forum_id), INDEX IDX_9474526CA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE forum (id INT AUTO_INCREMENT NOT NULL, videogame_id INT NOT NULL, name VARCHAR(300) NOT NULL, INDEX IDX_852BBECD25EB9E4B (videogame_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE settings (id INT AUTO_INCREMENT NOT NULL, forum_id INT DEFAULT NULL, date DATETIME NOT NULL, state VARCHAR(100) NOT NULL, theme VARCHAR(255) DEFAULT NULL, allow_comments TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_E545A0C529CCBAD0 (forum_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tag (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(80) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

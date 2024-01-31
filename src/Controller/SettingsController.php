@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SettingsController extends AbstractController
 {
-    #[Route('/settings/add', name: 'app_settings_add')]
+    #[Route('/settings/add/{id}', name: 'app_settings_add')]
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
         $settings = new Settings();

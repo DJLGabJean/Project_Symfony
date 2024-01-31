@@ -1,22 +1,35 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Ajout d'un tag{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="../../../assets/dist/output.css">
+{% endblock %}
+
 {% block body %}
-    <div class="container mx-auto">
-        <h1 class="text-2xl font-bold mb-4">Ajouter un jeu vidéo</h1>
-        <form action="{{ path('app_homepage') }}" method="POST">
-            <div class="mb-4">
-                <label for="title" class="block text-gray-700">Title</label>
-                <input type="text" id="title" name="title" class="border border-gray-300 rounded px-4 py-2 w-full">
+<div class="flex items-center justify-center h-screen bg-white">
+    <div class="w-full max-w-md p-8 space-y-4 bg-gray-100 rounded-lg shadow-2xl">
+        <h2 class="text-3xl font-bold text-center">Ajouter un jeu vidéo</h2>
+
+        {{ form_start(videogameForm, {'attr': {'class': 'space-y-4'}}) }}
+            <div class="space-y-2">
+                {{ form_label(videogameForm.name, 'Nom du jeu vidéo', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                {{ form_widget(videogameForm.name, {'attr': {'class': 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 text-gray-900'}}) }}
+                {{ form_errors(videogameForm.name, {'attr': {'class': 'text-red'}}) }}
             </div>
-            <div class="mb-4">
-                <label for="genre" class="block text-gray-700">Genre</label>
-                <input type="text" id="genre" name="genre" class="border border-gray-300 rounded px-4 py-2 w-full">
-            </div>
-            <div class="mb-4">
-                <label for="platform" class="block text-gray-700">Platform</label>
-                <input type="text" id="platform" name="platform" class="border border-gray-300 rounded px-4 py-2 w-full">
-            </div>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add</button>
-        </form>
+            <button
+                class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-5 w-full bg-green-500 hover:bg-green-600 rounded-md text-white"
+                type="submit"
+            >
+                Ajouter le jeu vidéo
+            </button>
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-5 w-full bg-blue-500 hover:bg-blue-600 text-white">
+                <a class="text-white" href="{{ path('app_homepage') }}" rel="ugc">
+                     Retourner à l'accueil
+                </a>
+            </button>
+      </div>
+        {{ form_end(videogameForm) }}
     </div>
+</div>
 {% endblock %}

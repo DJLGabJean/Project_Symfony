@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Forum;
+use App\Form\CommentType;
 use App\Form\ForumType;
 use App\Repository\ForumRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ForumController extends AbstractController
 {
     #[Route('/forum/{id}', name: 'app_forum')]
-    public function index(ForumRepository $forumRepository, int $id): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, ForumRepository $forumRepository, int $id): Response
     {
         $forum = $forumRepository->findByID($id);
 
@@ -23,14 +25,32 @@ class ForumController extends AbstractController
             throw $this->createNotFoundException('Forum non trouvé!');
         }
 
+        $comment = new Comment();
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            if (!$this->getUser()) {
+                throw $this->createNotFoundException('Utilisateur non trouvé!');
+            }
+            $comment->setForum($forum);
+            $comment->setUser($this->getUser());
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            $this->addFlash('success', 'Commentaire ajouté avec succès!');
+
+            return $this->redirectToRoute('app_forum', []);
+        }
+
         return $this->render('forumpage/forum.html.twig', [
             'forum' => $forum,
+            'commentForm' => $commentForm->createView()
         ]);
     }
 
-    #[Route('/forum/add', name: 'app_forum_add')]
+    #[Route('/forum/add/{id}', name: 'app_forum_add')]
     public function add(Request $request, EntityManagerInterface $entityManager, ForumRepository $forumRepository): Response
-    {
+    {        
         $forum = new Forum();
         $forumForm = $this->createForm(ForumType::class, $forum);
         $forumForm->handleRequest($request);

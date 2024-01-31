@@ -1,0 +1,4 @@
+{% macro nextIdAfterLast(collection) %}
+    {% set lastId = collection|last.id + 1 %}
+    {{ '%d'|format(lastId) }}
+{% endmacro %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un tag{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="../../../assets/dist/output.css">
+{% endblock %}
+
+{% block body %}
+<div class="flex items-center justify-center h-screen bg-white">
+    <div class="w-full max-w-md p-8 space-y-4 bg-gray-100 rounded-lg shadow-2xl">
+        <h2 class="text-3xl font-bold text-center">Ajouter un tag</h2>
+
+        {{ form_start(tagForm, {'attr': {'class': 'space-y-4'}}) }}
+            <div class="space-y-2">
+                {{ form_label(tagForm.name, 'Nom du Tag', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                {{ form_widget(tagForm.name, {'attr': {'class': 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 text-gray-900'}}) }}
+                {{ form_errors(tagForm.name, {'attr': {'class': 'text-red'}}) }}
+            </div>
+            <button
+                class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-5 w-full bg-green-500 hover:bg-green-600 rounded-md text-white"
+                type="submit"
+            >
+                Ajouter le tag
+            </button>
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-5 w-full bg-blue-500 hover:bg-blue-600 text-white">
+                <a class="text-white" href="{{ path('app_homepage') }}" rel="ugc">
+                     Retourner à l'accueil
+                </a>
+            </button>
+      </div>
+        {{ form_end(tagForm) }}
+    </div>
+</div>
+{% endblock %}

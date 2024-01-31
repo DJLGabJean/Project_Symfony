@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TagController extends AbstractController
 {
-    #[Route('/tag/add', name: 'app_tag_add')]
+    #[Route('/tag/add/{id}', name: 'app_tag_add')]
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
         $tag = new Tag();

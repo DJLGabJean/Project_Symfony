@@ -27,8 +27,11 @@ class ForumType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom du Forum',
             ])
-            ->add('videogame', VideogameType::class, [
-                'label' => false,
+            ->add('videogame', EntityType::class, [
+                'class' => Videogame::class,
+                'choice_label' => 'name',
+                'label' => 'Jeu vidéo',
+                'required' => true,
             ])
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,

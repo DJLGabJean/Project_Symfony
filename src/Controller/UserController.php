@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/user/add', name: 'app_user_add')]
+    #[Route('/user/add/{id}', name: 'app_user_add')]
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User();

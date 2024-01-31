@@ -81,30 +81,64 @@
                 <h2 class="font-semibold text-xl">{{ forum.comments|length }} Commentaires</h2>
 
                 {% for comment in forum.comments %}
-                <div class="text-sm flex items-start gap-4">
-                    <span class="relative flex shrink-0 overflow-hidden rounded-full w-10 h-10 border">
-                        <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">AC</span>
-                    </span>
-                    <div class="grid gap-1.5">
-                        <div class="flex items-center gap-2">
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-start gap-4">
+                        <span class="relative flex-shrink-0 overflow-hidden rounded-full w-10 h-10 border">
+                            <span class="flex items-center justify-center w-full h-full rounded-full bg-muted">AC</span>
+                        </span>
+                        <div>
                             <div class="font-semibold">{{comment.user.username}}</div>
                             <div class="text-gray-500 text-xs dark:text-gray-400">(Date du message)</div>
                         </div>
+                    </div>
                     <div>
                         {{comment.description}}
                     </div>
-                    <button class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                    <button class="inline-flex items-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-12 rounded-md px-40 pl-20">
                         Répondre
                     </button>
                 </div>
                 {% endfor %}
             </div>
         </div>
+        {% if not app.user %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Attention!</strong>
+            <span class="block sm:inline">Vous devez être connecté pour ajouter un commentaire.</span>
+        </div>
+        {% elseif not app.user.hasRole('ROLE_USER') %}
+        <p>Seuls les utilisateurs peuvent ajouter des commentaires.</p>
+        {% endif %}
     </main>
     {# {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}
         </div>
     {% endfor %} #}
+
+
+
+    {% if app.user and app.user.hasRole('ROLE_USER') %}
+    <div class="flex items-center justify-center h-screen bg-white">
+        <div class="w-full max-w-[90%] p-8 space-y-4 bg-gray-100 rounded-lg shadow-2xl">
+            <h2 class="text-3xl font-bold text-center">Participez à la discussion !</h2>
+            <p class="text-gray-500 text-center">Postez votre commentaire !</p>
+
+            {{ form_start(commentForm, {'attr': {'class': 'space-y-4'}}) }}
+                <div class="space-y-2">
+                    {{ form_label(commentForm.description, 'Commentaire', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                    {{ form_widget(commentForm.description, {'attr': {'class': 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 text-gray-900'}}) }}
+                    {{ form_errors(commentForm.description, {'attr': {'class': 'text-red'}}) }}
+                </div>
+                <button
+                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-5 w-full bg-green-500 hover:bg-green-600 rounded-md text-white"
+                    type="submit"
+                >
+                    Poster le commentaire
+                </button>
+            {{ form_end(commentForm) }}
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

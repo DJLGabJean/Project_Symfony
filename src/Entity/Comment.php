@@ -13,7 +13,7 @@ class Comment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 3000)]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
@@ -21,7 +21,7 @@ class Comment
     private ?Forum $forum = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     public function getId(): ?int

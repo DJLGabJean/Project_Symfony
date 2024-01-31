@@ -12,7 +12,7 @@ use App\Entity\Videogame;
 
 class VideogameController extends AbstractController
 {
-    #[Route('/videogame/add', name: 'app_videogame_add')]
+    #[Route('/videogame/add/{id}', name: 'app_videogame_add')]
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
         $videogame = new Videogame();

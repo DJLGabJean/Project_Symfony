@@ -1,32 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="../../assets/dist/output.css">
-{% endblock %}
+{% block title %}Ajout d'un tag{% endblock %}
 
-{% block title %}Ajout d'un forum{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="../../../assets/dist/output.css">
+{% endblock %}
 
 {% block body %}
 <div class="flex items-center justify-center h-screen bg-white">
     <div class="w-full max-w-md p-8 space-y-4 bg-gray-100 rounded-lg shadow-2xl">
-        <h2 class="text-3xl font-bold text-center">Ajout d'un forum</h2>
+        <h2 class="text-3xl font-bold text-center">Ajouter un jeu vidéo</h2>
 
-        {{ form_start(forumForm) }}
-            {{ form_row(forumForm.name) }}
-            {{ form_row(forumForm.videogame) }}
-            {{ form_row(forumForm.tags) }}
-            {{ form_row(forumForm.settings) }}
-            <button type="submit">Soumettre</button>
+        {{ form_start(forumForm, {'attr': {'class': 'space-y-4'}}) }}
+            <div class="space-y-2">
+                {{ form_label(forumForm.name, 'Nom du forum', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                {{ form_widget(forumForm.name, {'attr': {'class': 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 text-gray-900'}}) }}
+                {{ form_errors(forumForm.name, {'attr': {'class': 'text-red'}}) }}
+            </div>
+            <div class="space-y-2">
+                {{ form_label(forumForm.videogame, 'Nom du jeu vidéo', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                {{ form_widget(forumForm.videogame, {'attr': {'class': 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 text-gray-900'}}) }}
+                {{ form_errors(forumForm.videogame, {'attr': {'class': 'text-red'}}) }}
+            </div>
+            <div class="space-y-2">
+                {{ form_label(forumForm.tags, 'Tags', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                {{ form_widget(forumForm.tags, {'attr': {'class': 'block rounded-lg border border-input bg-background px-3 py-1 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 text-gray-900'}}) }}
+                {{ form_errors(forumForm.tags, {'attr': {'class': 'text-red'}}) }}
+            </div>
+            <div class="space-y-2">
+                {{ form_label(forumForm.settings, 'Paramètres', {'label_attr': {'class': 'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'}}) }}
+                {{ form_widget(forumForm.settings, {'attr': {'class': 'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-200 text-gray-900'}}) }}
+                {{ form_errors(forumForm.settings, {'attr': {'class': 'text-red'}}) }}
+            </div>
+        
+            <button
+                class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-5 w-full bg-green-500 hover:bg-green-600 rounded-md text-white"
+                type="submit"
+            >
+                Ajouter le forum
+            </button>
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-5 w-full bg-blue-500 hover:bg-blue-600 text-white">
+                <a class="text-white" href="{{ path('app_homepage') }}" rel="ugc">
+                     Retourner à l'accueil
+                </a>
+            </button>
+      </div>
         {{ form_end(forumForm) }}
-
     </div>
 </div>
 {% endblock %}
-
-{% block javascripts %}
-<script>
-</script>
-{% endblock %}
-
-
-

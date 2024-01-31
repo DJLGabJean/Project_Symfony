@@ -16,7 +16,9 @@ class VideogameFixtures extends Fixture
         $videogamesArray = [
             "Diablo 4",
             "Assassin's Creed Mirage",
-            "Tekken 7"
+            "Tekken 7",
+            "Palworld",
+            "The Legend of Zelda: Tears of the Kingdom",
         ];
 
         foreach ($videogamesArray as $key => $videogameName) {

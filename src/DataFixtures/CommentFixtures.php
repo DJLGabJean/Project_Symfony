@@ -263,6 +263,13 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
                 La frame data : http://rbnorway.org/t7-frame-data/
                 
                 N'hésitez pas à poser vos questions sur ce topic !"
+            ],
+            [ //Pourquoi PALWORLD fait autant rager ?
+                "Je ne comprends pas pourquoi ce jeu fait autant rager les gens. Il a l'air plutôt sympa, et il est encore en développement. Je pense que les gens sont juste trop habitués à voir des jeux de survie avec des graphismes réalistes, et que du coup, ils ne sont pas prêts à accepter un jeu de survie avec des graphismes cartoon. Je pense que c'est juste une question d'habitude, et que les gens vont finir par s'y faire."
+            ],
+            [
+                "Ce jeu nous rappelle 2 choses\n1 que Game Frique sont des branleurs qui vont devoir se bouger le cul si ils veulent continuer d'être pris au sérieux
+                \n2 qu'on a pas besoin de graphismes top tier et d'être super innovant pour casser l'industrie, il suffit d'avoir des idées et d'oser les mettre en pratique"
             ]
             ];
 
@@ -301,6 +308,18 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         $comment6->setUser($this->getReference(UserFixtures::USER_REFERENCE. '_' . 5));
         $manager->persist($comment6);
         $this->addReference(self::COMMENT_REFERENCE . '_' . 5, $comment6);
+
+        $comment7 = new Comment();
+        $comment7->setDescription($commentsArray[6][0]);
+        $comment7->setUser($this->getReference(UserFixtures::USER_REFERENCE. '_' . 6));
+        $manager->persist($comment7);
+        $this->addReference(self::COMMENT_REFERENCE . '_' . 6, $comment7);
+
+        $comment8 = new Comment();
+        $comment8->setDescription($commentsArray[7][0]);
+        $comment8->setUser($this->getReference(UserFixtures::USER_REFERENCE. '_' . 3));
+        $manager->persist($comment8);
+        $this->addReference(self::COMMENT_REFERENCE . '_' . 7, $comment8);
 
         $manager->flush();
     }
