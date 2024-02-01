@@ -28,7 +28,7 @@ npm run tailwind
 ```
 
 > [!CAUTION]
-> Les deux commandes de tailwind sont importants dans le cas où tailwind n'est pas bien exécuté sur le projet.
+> Les deux commandes de tailwind sont importantes dans le cas où tailwind n'est pas bien exécuté sur le projet.
 
 
 ## Lien de la démo
