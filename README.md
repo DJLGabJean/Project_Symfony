@@ -8,7 +8,7 @@ Venez découvrir une application avec des forums de jeux vidéos revisités aux 
 
 ## Installation
 
-Vous aurez besoin d'exécuter dans l'ordre ses commandes pour installer les dépendances du projet  :
+Vous aurez besoin d'exécuter dans l'ordre ces commandes pour installer les dépendances du projet  :
 
 ```bash
 composer install
