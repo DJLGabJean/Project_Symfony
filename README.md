@@ -69,7 +69,7 @@ _Mot de passe_ : okokokok
 
 'ROLE_ADMIN' est donné uniquement à un **seul utilisateur** actuellement :
 
-_Admin_ : _Lepetitfou_@gmail.com
+_Admin_ : `_Lepetitfou_`@gmail.com
 
 _Mot de passe_ : claquesolide24
 
