@@ -3,7 +3,7 @@
 
 ## Game Forum
 
-Venez découvrir un forum de jeu revisité aux goûts du jour dans un style moderne. Parcourez les forums afin de trouver les informations qui correspondent à vos attentes!
+Venez découvrir une application avec des forums de jeux vidéos revisités aux goûts du jour dans un style web moderne. Parcourez les forums afin de trouver les informations qui correspondent à vos attentes!
 
 
 ## Installation
