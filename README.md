@@ -62,16 +62,16 @@ npm run tailwind
 
 **Exemple d'utilisateur** :
 
-_Utilisateur_ : Okok32@gmail.com
+_Utilisateur_ : `Okok32@gmail.com`
 
-_Mot de passe_ : okokokok
+_Mot de passe_ : `okokokok`
 
 
 'ROLE_ADMIN' est donné uniquement à un **seul utilisateur** actuellement :
 
-_Admin_ : `_Lepetitfou_`@gmail.com
+_Admin_ : `_Lepetitfou_@gmail.com`
 
-_Mot de passe_ : claquesolide24
+_Mot de passe_ : `claquesolide24`
 
 ## Lien de la démo
 
