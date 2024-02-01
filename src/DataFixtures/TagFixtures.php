@@ -19,7 +19,8 @@ class TagFixtures extends Fixture
             "News",
             "Discussion",
             "Question",
-            "Soluce"];
+            "Soluce",
+            "Guide"];
 
         foreach ($tagsArray as $key => $tagName) {
             $tag = new Tag();

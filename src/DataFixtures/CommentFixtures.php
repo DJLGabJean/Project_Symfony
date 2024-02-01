@@ -270,8 +270,18 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             [
                 "Ce jeu nous rappelle 2 choses\n1 que Game Frique sont des branleurs qui vont devoir se bouger le cul si ils veulent continuer d'être pris au sérieux
                 \n2 qu'on a pas besoin de graphismes top tier et d'être super innovant pour casser l'industrie, il suffit d'avoir des idées et d'oser les mettre en pratique"
+            ],
+            [ //Choisir entre botw ou totk
+                "Bonjour,
+                Après différentes recherches, j'hésite entre faire botw ou totk. En effet, au vu de la durée de vie, je ne pense pas faire les deux et j'hésite sur lequel faire.
+                Je vois des avis qui disent que totk au niveau du gameplay, est meilleur que botw. De même, sur la redondance de la map. Pour certains, il faut absolument faire botw avant de faire totk. Notamment pour découvrir ce qui était une révolution de l'openworld.
+                Je précise que ce serait mon premier Zelda. Que me conseillez vous ?"
+            ],
+            [
+                "TOTK. Plus de choses à faire, plus de libertés et de place laissée à l'imagination, plus de découvertes, carte plus grande. Comme a dit mon VDD, tu comprendras ce qui est arrivé dans BOTW"
             ]
-            ];
+        ];
+            
 
         $comment1 = new Comment();
         $comment1->setDescription($commentsArray[0][0]);
@@ -320,6 +330,18 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         $comment8->setUser($this->getReference(UserFixtures::USER_REFERENCE. '_' . 3));
         $manager->persist($comment8);
         $this->addReference(self::COMMENT_REFERENCE . '_' . 7, $comment8);
+
+        $comment9 = new Comment();
+        $comment9->setDescription($commentsArray[8][0]);
+        $comment9->setUser($this->getReference(UserFixtures::USER_REFERENCE. '_' . 2));
+        $manager->persist($comment9);
+        $this->addReference(self::COMMENT_REFERENCE . '_' . 8, $comment9);
+
+        $comment10 = new Comment();
+        $comment10->setDescription($commentsArray[9][0]);
+        $comment10->setUser($this->getReference(UserFixtures::USER_REFERENCE. '_' . 7));
+        $manager->persist($comment10);
+        $this->addReference(self::COMMENT_REFERENCE . '_' . 9, $comment10);
 
         $manager->flush();
     }

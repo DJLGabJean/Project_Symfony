@@ -47,15 +47,24 @@ class ForumFixtures extends Fixture implements DependentFixtureInterface
         $forum4 = new Forum();
         $forum4->setName("Pourquoi PALWORLD fait autant rager ?");
         $forum4->setVideogame($this->getReference(VideogameFixtures::VIDEOGAME_REFERENCE. '_' . 3));
-        $forum4->setSettings($this->getReference(SettingsFixtures::SETTINGS_REFERENCE. '_' . 2));
+        $forum4->setSettings($this->getReference(SettingsFixtures::SETTINGS_REFERENCE. '_' . 3));
         $forum4->addComment($this->getReference(CommentFixtures::COMMENT_REFERENCE. '_' . 6));
         $forum4->addComment($this->getReference(CommentFixtures::COMMENT_REFERENCE. '_' . 7));
         $forum4->addTag($this->getReference(TagFixtures::TAG_REFERENCE. '_' . 1));
         $forum4->addTag($this->getReference(TagFixtures::TAG_REFERENCE. '_' . 3));
         $manager->persist($forum3);
         $this->addReference(self::FORUM_REFERENCE . '_' . 3, $forum4);
-        
 
+        $forum5 = new Forum();
+        $forum5->setName("Choisir entre BOTW ou TOTK");
+        $forum5->setVideogame($this->getReference(VideogameFixtures::VIDEOGAME_REFERENCE. '_' . 4));
+        $forum5->setSettings($this->getReference(SettingsFixtures::SETTINGS_REFERENCE. '_' . 4));
+        $forum5->addComment($this->getReference(CommentFixtures::COMMENT_REFERENCE. '_' . 8));
+        $forum5->addComment($this->getReference(CommentFixtures::COMMENT_REFERENCE. '_' . 9));
+        $forum5->addTag($this->getReference(TagFixtures::TAG_REFERENCE. '_' . 1));
+        $forum5->addTag($this->getReference(TagFixtures::TAG_REFERENCE. '_' . 3));
+        $manager->persist($forum5);
+        
         //$forum->addCreator(); A créer plus tard dans la classe Forum
 
         $manager->flush();

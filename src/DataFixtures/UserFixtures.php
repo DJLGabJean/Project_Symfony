@@ -27,7 +27,8 @@ class UserFixtures extends Fixture
             "ChaineConneries",
             "Beidou",
             "Signaleur",
-            "-Ryuuzaki"
+            "-Ryuuzaki",
+            "_Lepetitfou_"
         ];
 
         $passwordArray = [
@@ -37,7 +38,8 @@ class UserFixtures extends Fixture
             "ytbconneries965",
             "warsmachine85",
             "Orelbloques22",
-            "123456789"
+            "123456789",
+            "claquesolide24"
         ];
 
         foreach ($usersArray as $key => $user) {
@@ -47,7 +49,12 @@ class UserFixtures extends Fixture
             // Hashage du mot de passe
             $hashedPassword = $this->passwordEncoder->hashPassword($username, $passwordArray[$key]);
             $username->setPassword($hashedPassword);
-            $username->setRoles(["ROLE_USER"]);
+            if ($key == 7){
+                $username->setRoles(["ROLE_ADMIN", "ROLE_USER"]);
+            }
+            else {
+                $username->setRoles(["ROLE_USER"]);
+            }
             $manager->persist($username);
             $this->addReference(self::USER_REFERENCE . '_' . $key, $username);
         }

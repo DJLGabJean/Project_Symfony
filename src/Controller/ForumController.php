@@ -39,7 +39,9 @@ class ForumController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Commentaire ajouté avec succès!');
 
-            return $this->redirectToRoute('app_forum', []);
+            return $this->redirectToRoute('app_forum', [
+                'id' => $forum->getId(),
+            ]);
         }
 
         return $this->render('forumpage/forum.html.twig', [
