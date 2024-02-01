@@ -15,7 +15,7 @@ composer install
 npm install
 ```
 
-Cette commande suivante permet de construire tailwind :
+Cette commande permet de construire tailwind :
 
 ```bash
 npm run build
