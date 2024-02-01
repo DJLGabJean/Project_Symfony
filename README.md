@@ -31,7 +31,8 @@ npm run tailwind
 > Les deux commandes de tailwind sont importants dans le cas où tailwind n'est pas bien exécuté sur le projet.
 
 
-## Démo
+## Lien de la démo
 
+https://youtu.be/WiUPglKuz7I
 
 
